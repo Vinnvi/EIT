@@ -5,9 +5,10 @@ import getopt
 import re
 import difflib
 
-#traitement pour wsj_0010_sample.txt.ner.stanford -> wsj_0010_sample.txt.pos.univ.stanford
+#Script utilise pour representer les donnees dans le format demande en partie 4, point 2
+
 def traitementStanFord() :
-	reponse= "" #"Entite nommee\tType\tNombre d'occurence\tProportion dans le texte(%)"
+	reponse= ""
 	fDonnees = open("wsj_0010_sample.txt.ner.stanford","r")
 	previousElement = ""
 	f2 = fDonnees.readlines()
@@ -51,7 +52,7 @@ def traitementStanFord() :
 		compteur = compteur+1
 		resultat = resultat+"\n"			
 	f = open("wsj_0010_sample.txt.ner.stanford.output","w+")
-	f.write(resultat)
+	f.write("Entite nommee\tType\tNombre d'occurence\tProportion dans le texte(%)\n"+resultat)
 	f.close()
 	fDonnees.close()
 
