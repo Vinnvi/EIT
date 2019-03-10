@@ -2,6 +2,9 @@
 
 Les scripts fonctionnent de la manière suivante : 
 
+analyseurQuestion2.py : le script correspond au script nécessaire dans la partie 2 de la section exercice du grand II.
+Lancer la commande python analyseurQuestion2.py se suffit à elle même.
+
 exo3.py : le script correspond au script nécessaire dans la partie 3 de la section exercice.
 Lancer la commande python exo3.py se suffit à elle même.
 
