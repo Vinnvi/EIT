@@ -7,14 +7,14 @@ import difflib
 
 #Remplace par le tag universel
 def refTag(oldTag):
-	#pretraitement pour enlever les caractères invisibles
+	#pretraitement pour enlever les caracteres invisibles
 	oldTag = oldTag.replace(' \n','')
 	oldTag = oldTag.replace('\n','')
 
 	#on ouvre la table de correspondance
 	fTags = open("POSTags_PTB_Universal.txt","r")
 	fLines = fTags.readlines()
-	#bug avec CC : on le traite à part
+	#bug avec CC : on le traite a part
 	if(oldTag == "CC"):
 		return "CONJ"
 
@@ -22,7 +22,7 @@ def refTag(oldTag):
 	for line in fLines:
 		tags = line.split(" ")
 		if(len(tags)>1):
-			#si des elements vides se sont glissés on les enleves
+			#si des elements vides se sont glisses on les enleves
 			if(len(tags)>2):
 				tags = filter(None,tags);
 			#le tag PTB correspond a notre tag : on renvoie le tag uni correspondant
@@ -66,7 +66,6 @@ def traitementStanFord() :
 				mot = sp[0]
 				tag = sp[1]
 				reponse = reponse+" "+mot+"_"+refTag(tag)
-		reponse = reponse+"\n"
 				
 					
 	f = open("wsj_0010_sample.txt.pos.univ.stanford","w+")
@@ -81,9 +80,14 @@ def traitementLima2():
 	f1 = myFile.readlines()
 	#on separe chaque ligne (ligne = mot \t tagPTB)
 	for line in f1:
-		sp = line.split("\t")
-		 #on enregistre avec a la place de tagPTB -> tagUniv 
-		reponse = reponse+sp[0]+"\t"+refTag(sp[1])+"\n"
+		mots_tags = line.split(" ")
+		for mot_tag in mots_tags :
+			result = mot_tag.split("_")
+			if(len(result) > 1):
+				mot = result[0]
+				tag = result[1]
+			 	#on enregistre avec a la place de tagPTB -> tagUniv 
+				reponse = reponse+mot+"_"+refTag(tag)+" "
 	#on sauvegarde le resultat dans un nouveau fichier
 	f = open("wsj_0010_sample.txt.pos.univ.ref","w+")
 	f.write(reponse)
